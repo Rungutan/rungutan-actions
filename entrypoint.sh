@@ -3,6 +3,8 @@ set -Eeuo pipefail
 
 RUNGUTAN_WAIT_FINISH=false
 export RUNGUTAN_WAIT_FINISH
+RUNGUTAN_WAIT_FINISH_LOWERCASE=false
+export RUNGUTAN_WAIT_FINISH_LOWERCASE
 
 if [ -z "$RUNGUTAN_TEAM_ID" ]; then
   echo "RUNGUTAN_TEAM_ID is not set"
@@ -23,7 +25,7 @@ if [[ ! -f "$RUNGUTAN_TEST_FILE" ]]; then
   echo "${RUNGUTAN_TEST_FILE} does not exist"
 fi
 
-if [ -z "$RUNGUTAN_WAIT_FINISH" ]]; then
+if [ -z "$RUNGUTAN_WAIT_FINISH" ]; then
   RUNGUTAN_WAIT_FINISH_LOWERCASE=$(echo "$RUNGUTAN_WAIT_FINISH" | awk '{print tolower($0)}')
 fi
 
