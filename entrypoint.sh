@@ -31,7 +31,7 @@ export RUNGUTAN_API_KEY
 export RUNGUTAN_TEST_FILE
 export RUNGUTAN_WAIT_FINISH_LOWERCASE
 
-
+echo "Running load test on $GITHUB_REPOSITORY with run_id $GITHUB_RUN_ID"
 
 if [ -z "$RUNGUTAN_TEST_NAME" ]; then
   export RUNGUTAN_TEST_NAME
