@@ -37,16 +37,16 @@ export RUNGUTAN_WAIT_FINISH_LOWERCASE
 echo "Running load test on $GITHUB_REPOSITORY with run_id $GITHUB_RUN_ID"
 
 if [ -z "$RUNGUTAN_TEST_NAME" ]; then
+  if [ "$RUNGUTAN_WAIT_FINISH_LOWERCASE" == "true" ]; then
+    rungutan tests add --test_file ${RUNGUTAN_TEST_FILE} --wait_to_finish
+  else
+    rungutan tests add --test_file ${RUNGUTAN_TEST_FILE}
+  fi
+else
   export RUNGUTAN_TEST_NAME
   if [ "$RUNGUTAN_WAIT_FINISH_LOWERCASE" == "true" ]; then
     rungutan tests add --test_file ${RUNGUTAN_TEST_FILE} --wait_to_finish --test_name ${RUNGUTAN_TEST_NAME}
   else
     rungutan tests add --test_file ${RUNGUTAN_TEST_FILE} --test_name ${RUNGUTAN_TEST_NAME}
-  fi
-else
-  if [ "$RUNGUTAN_WAIT_FINISH_LOWERCASE" == "true" ]; then
-    rungutan tests add --test_file ${RUNGUTAN_TEST_FILE} --wait_to_finish
-  else
-    rungutan tests add --test_file ${RUNGUTAN_TEST_FILE}
   fi
 fi
