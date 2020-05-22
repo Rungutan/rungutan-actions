@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Load test your platform with Rungutan
-      uses: Rungutan/rungutan-actions@latest
+      uses: Rungutan/rungutan-actions@1.0.0
       env:
         RUNGUTAN_TEAM_ID: ${{ secrets.RUNGUTAN_TEAM_ID }}
         RUNGUTAN_API_KEY: ${{ secrets.RUNGUTAN_API_KEY }}
@@ -51,7 +51,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Load test your platform with Rungutan
-      uses: Rungutan/rungutan-actions@latest
+      uses: Rungutan/rungutan-actions@1.0.0
       env:
         RUNGUTAN_TEAM_ID: ${{ secrets.RUNGUTAN_TEAM_ID }}
         RUNGUTAN_API_KEY: ${{ secrets.RUNGUTAN_API_KEY }}
