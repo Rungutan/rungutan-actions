@@ -1,0 +1,14 @@
+# This workflow will run a load test using Rungutan against your platform
+# For more information see: https://docs.rungutan.com/Integrations/#github-actions
+
+name: Load test your platform with Rungutan
+description: 'Run your load test directly on every release'
+author: 'Rungutan'
+
+branding:
+  color: yellow
+  icon: upload-cloud
+
+runs:
+  using: docker
+  image: Dockerfile
