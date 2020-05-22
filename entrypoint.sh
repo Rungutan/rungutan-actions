@@ -1,6 +1,9 @@
 #! /usr/bin/env bash
 set -Eeuo pipefail
 
+RUNGUTAN_WAIT_FINISH=false
+export RUNGUTAN_WAIT_FINISH
+
 if [ -z "$RUNGUTAN_TEAM_ID" ]; then
   echo "RUNGUTAN_TEAM_ID is not set"
   exit 1
@@ -22,8 +25,6 @@ fi
 
 if [ -z "$RUNGUTAN_WAIT_FINISH" ]]; then
   RUNGUTAN_WAIT_FINISH_LOWERCASE=$(echo "$RUNGUTAN_WAIT_FINISH" | awk '{print tolower($0)}')
-else
-  RUNGUTAN_WAIT_FINISH_LOWERCASE="false"
 fi
 
 export RUNGUTAN_TEAM_ID
