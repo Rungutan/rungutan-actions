@@ -1,0 +1,19 @@
+{
+  "num_clients": 1,
+  "hatch_rate": 1,
+  "run_time": 5,
+  "threads_per_region": 1,
+  "workflow": [
+    {
+      "path": "/",
+      "method": "GET"
+    }
+  ],
+  "domain_name": "rungutan.com",
+  "protocol": "https",
+  "test_region": [
+    "us-east-1"
+  ],
+  "min_wait": 1000,
+  "max_wait": 1000
+}

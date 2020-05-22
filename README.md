@@ -1,13 +1,13 @@
 # Rungutan - GitHub Actions
 
-This workflow will run a load test using Rungutan against your platform
+This workflow will run a load test using Rungutan against your own platform based on a test case that you version in your own repository.
 
 For more information see: https://docs.rungutan.com/Integrations/#github-actions
 
-## Running the load test with your own packages
+## Running the load test without waiting for it to finish
 
 ```
-name: Load test your platform with Rungutan
+name: Load test with Rungutan
 
 on:
   release:
@@ -15,24 +15,60 @@ on:
       - created
 
 jobs:
-  deploy:
+  load:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v1
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install rungutan
-    - name: Build and publish
+
+    - name: Load test your platform with Rungutan
+      uses: Rungutan/rungutan-actions@latest
       env:
-        RUNGUTAN_TEAM_ID: your_team
+        RUNGUTAN_TEAM_ID: ${{ secrets.RUNGUTAN_TEAM_ID }}
         RUNGUTAN_API_KEY: ${{ secrets.RUNGUTAN_API_KEY }}
-      run: |
-        rungutan tests add --test_file test_file.json --wait_to_finish --test_name ${GITHUB_REPOSITORY}-${GITHUB_RUN_ID}
+        RUNGUTAN_TEST_FILE: test_file.json
+        RUNGUTAN_TEST_NAME: ${{ github.repository }}-${{ github.ref }}
+
 ```
+
+## Running the load test and wait for it to finish
+
+```
+name: Load test with Rungutan
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  load:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Load test your platform with Rungutan
+      uses: Rungutan/rungutan-actions@latest
+      env:
+        RUNGUTAN_TEAM_ID: ${{ secrets.RUNGUTAN_TEAM_ID }}
+        RUNGUTAN_API_KEY: ${{ secrets.RUNGUTAN_API_KEY }}
+        RUNGUTAN_TEST_FILE: test_file.json
+        RUNGUTAN_TEST_NAME: ${{ github.repository }}-${{ github.ref }}
+        RUNGUTAN_WAIT_FINISH: true
+
+```
+
+## Complete list of variables
+
+Here's the list and their default values:
+
+| Environment value name  | Is required ? | Default value (if any)   | Comments                                                                          |
+| ----------------------- | ------------- | ------------------------ | --------------------------------------------------------------------------------- |
+| RUNGUTAN_TEAM_ID        | YES           | No default value         | You should define this as a GitHub secret                                         |
+| RUNGUTAN_API_KEY        | YES           | No default value         | You should define this as a GitHub secret                                         |
+| RUNGUTAN_TEST_FILE      | YES           | No default value         | The filename in your repository which contains the test case                      |
+| RUNGUTAN_TEST_NAME      | NO            | No default value         | If not provided, script will check for value of "test_name in your test case file |
+| RUNGUTAN_WAIT_FINISH    | NO            | Default value is "false" | If not provided, the script will simply launch the test but not wait for it to finish |
