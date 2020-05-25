@@ -2,7 +2,9 @@
 
 This workflow will run a load test using Rungutan against your own platform based on a test case that you version in your own repository.
 
-For more information see: https://docs.rungutan.com/Integrations/#github-actions
+Check out the official platform here: https://rungutan.com
+
+For more information on how to set up GitHub Integrations, read more here: https://docs.rungutan.com/Integrations/#github-actions
 
 ## Running the load test without waiting for it to finish
 
